@@ -9,6 +9,6 @@
 <body>
 	<h1>home page</h1>
 	<a href = "product">product-list</a><br>
-	<a href = "member">member-list</a>
+	<a href = "member.do">member-list</a>
 </body>
 </html>

@@ -34,6 +34,6 @@
   
   <servlet-mapping>
   	<servlet-name>member</servlet-name>
-  	<url-pattern>/member</url-pattern>
+  	<url-pattern>/member.do</url-pattern>
   </servlet-mapping>
 </web-app>
