@@ -2,7 +2,7 @@ package com.home.product;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.company.home.test.product.ProductDAO;
 import com.company.home.test.product.ProductDTO;
+import com.company.home.test.product.ProductService;
 import com.company.home.test.product.option.ProductOptionDAO;
+import com.company.home.test.product.option.ProductOptionDTO;
 
 /**
  * Servlet implementation class ProductController
@@ -23,7 +25,7 @@ import com.company.home.test.product.option.ProductOptionDAO;
 public class ProductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductDAO productDAO; 
-	private ProductOptionDAO productOptionDAO;
+	private ProductService productService;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -32,7 +34,7 @@ public class ProductController extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
         productDAO = new ProductDAO();
-        productOptionDAO = new ProductOptionDAO();
+        productService = new ProductService();
         
     }
 
@@ -41,6 +43,61 @@ public class ProductController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("product page");
+		
+		
+		String str = request.getRequestURI();
+		int idx = str.lastIndexOf("/");
+		str = str.substring(idx + 1);
+		
+		RequestDispatcher view;
+		
+		switch(str) {
+		case "list.do":
+			try {
+				List<ProductDTO> ar = productService.getProductList();
+				request.setAttribute("list", ar);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			view = request.getRequestDispatcher("/WEB-INF/views/product/productList.jsp");
+			view.forward(request, response);
+			break;
+		case "add.do":
+			view = request.getRequestDispatcher("/WEB-INF/views/product/productAdd.jsp");
+			view.forward(request, response);
+			break;
+		case "detail.do":
+			ProductDTO productDTO = new ProductDTO();
+			String productNumber = request.getParameter("productNum");
+			System.out.println(productNumber);
+			int proNum = Integer.parseInt(productNumber);
+			try {
+				productDTO.setPro_num(proNum);
+				productDTO = productService.getProductDetail(productDTO);
+				request.setAttribute("detail", productDTO);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			view = request.getRequestDispatcher("/WEB-INF/views/product/productDetail.jsp");
+			view.forward(request, response);
+			break;
+		case "update.do":
+			view = request.getRequestDispatcher("/WEB-INF/views/product/productUpdate.jsp");
+			view.forward(request, response);
+			break;
+		case "delete.do":
+			view = request.getRequestDispatcher("/WEB-INF/views/product/productDelete.jsp");
+			view.forward(request, response);
+			break;
+		default :
+			break;
+		}
+
+		
+		
 		
 //		try {
 //			List<ProductDTO> listDTO = productDAO.getProduct();
@@ -55,15 +112,34 @@ public class ProductController extends HttpServlet {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+// 		-----------------------------------------------------
+//		String name = request.getParameter("name");
+//		System.out.println("name : " + name);
+//		
+//		String price = request.getParameter("price");
+//		if(price != null) {
+//			int p = Integer.parseInt(price);
+//			System.out.println("price : " + p);
+//		}
+//		
+//		String detail = request.getParameter("detail");
+//		
+//		ProductDTO productDTO = new ProductDTO();
+//		productDTO.setPro_name(name);
+//		productDTO.setPro_introduce(detail);
+//		
+//		try {
+//			int result = productService.setAddProduct(productDTO, new ArrayList<ProductOptionDTO>());
+//			System.out.println(result);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		
 		
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/product/productlist.jsp");
 		
 		
-		
-		
-		view.forward(request, response);
 	}
 
 	/**

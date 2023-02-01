@@ -9,12 +9,35 @@ import com.company.home.test.product.option.ProductOptionDTO;
 
 public class ProductService {
 	//강한 결합도
+	private ProductDAO productDAO;
 	private ProductOptionDAO productOptionDAO;
 	
 	public ProductService() {
 		
+		this.productDAO = new ProductDAO();
 		this.productOptionDAO = new ProductOptionDAO();
 		
+	}
+	
+	public int setAddProduct(ProductDTO productDTO,List<ProductOptionDTO> ar) throws Exception{
+		//product테이블에 상품등록 및 옵션 등록
+		int productNum = productDAO.getProductNum().intValue();
+		productDTO.setPro_num(productNum);
+		int result = productDAO.addProduct(productDTO);
+		
+		for(ProductOptionDTO productOptionDTO : ar) {
+			productOptionDTO.setOption_num(productNum);
+			result = productOptionDAO.addProductOption(productOptionDTO);
+		}
+		return result;
+	}
+	
+	public List<ProductDTO> getProductList() throws Exception{
+		return productDAO.getProduct();
+	}
+	
+	public ProductDTO getProductDetail(ProductDTO productDTO) throws Exception{
+		return productDAO.getProductDetail(productDTO);
 	}
 	
 	//약한 결합도

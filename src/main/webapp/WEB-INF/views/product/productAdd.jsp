@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>web-inf-home</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<h1>home page</h1>
-	<a href = "product/list.do">product-list</a><br>
-	<a href = "member.do">member-list</a>
+	<h1>productAdd</h1>
 </body>
 </html>

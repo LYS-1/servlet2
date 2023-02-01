@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +39,33 @@ public class HomeController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("H W");
+//		String str = request.getMethod();
+//		System.out.println("method :" +  str);
+//		StringBuffer sb = request.getRequestURL();
+//		System.out.println("url : " + sb);
+//		str = request.getRequestURI();
+//		System.out.println("uri : " + str);
+//		Cookie[] cookie= request.getCookies();
+//		for(Cookie c : cookie) {
+//			System.out.println("cookie : " + c.getName());
+//			System.out.println("value : " + c.getValue());
+//		}
+//		str = request.getContextPath();
+//		System.out.println("contextpath : " + str);
+//		str = request.getParameter("name");
+//		System.out.println("param_NAME : " + str);
+//		str = request.getParameter("age");
+//		
+//		if(str != null) {
+//			int age = Integer.parseInt(str);
+//			System.out.println("param_AGE : " + age);
+//		}
+//		String[] sList = request.getParameterValues("money");
+//		
+//		for(String strL : sList) {
+//			System.out.println("money : " + strL);
+//		}
+		
 		
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/home.jsp");
 		view.forward(request, response);

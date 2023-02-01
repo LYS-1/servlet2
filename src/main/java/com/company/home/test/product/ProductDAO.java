@@ -11,6 +11,19 @@ import com.company.home.util.DBconnection;
 
 public class ProductDAO {
 	
+	public int getMax() throws Exception{
+		Connection con = DBconnection.getConnection();
+		String sql = "SELECT MAX(PRO_NUM) FROM PRODUCT";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ResultSet rs = ps.executeQuery();
+		int result = 0;
+		
+		if(rs.next()) {
+			result = rs.getInt("MAX(PRO_NUM)");
+		}
+		return result;
+	}
 	public Long getProductNum()throws Exception{
 		
 		Connection con = DBconnection.getConnection();
@@ -31,7 +44,30 @@ public class ProductDAO {
 		
 	}
 	
-	
+	public ProductDTO getProductDetail(ProductDTO productDTO) throws Exception{
+		
+		Connection con = DBconnection.getConnection();
+		
+		String sql = "SELECT * FROM PRODUCT WHERE PRO_NUM = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, productDTO.getPro_num());
+		
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next()) {
+			productDTO = new ProductDTO();
+			productDTO.setPro_num(rs.getInt("PRO_NUM"));
+			productDTO.setPro_introduce(rs.getString("PRO_INTRODUCE"));
+			productDTO.setRating(rs.getDouble("RATING"));
+			productDTO.setTag(rs.getString("TAG"));
+			productDTO.setPro_name(rs.getString("PRO_NAME"));
+		}
+		
+		return productDTO;
+		
+	}
 	public List<ProductDTO> getProduct() throws Exception{
 		ArrayList<ProductDTO> arDTO = new ArrayList<ProductDTO>();
 		
@@ -67,7 +103,11 @@ public class ProductDAO {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, productDTO.getPro_num());
 		ps.setString(2, productDTO.getPro_introduce());
-		ps.setDouble(3, productDTO.getRating());
+		if(productDTO.getRating() != null) {
+		ps.setDouble(3, productDTO.getRating());}
+		else {
+			ps.setDouble(3, 0);
+		}
 		ps.setString(4, productDTO.getTag());
 		ps.setString(5, productDTO.getPro_name());
 

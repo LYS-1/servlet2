@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ page import = "java.io.PrintWriter" %>
 <%@ page import = "java.util.List" %>
 <%@ page import = "com.company.home.test.product.ProductDAO" %>
 <%@ page import = "com.company.home.test.product.ProductDTO" %>
@@ -13,7 +12,22 @@
 </head>
 <body>
 	<h1>product list page</h1>
-	<a href = "home">back-home</a>
+	<a href = "add.do">ProductAdd</a>
+	<a href = "update.do">ProductUpdate</a>
+	<br>
+	
+	<%
+		List<ProductDTO> ar = (List<ProductDTO>)request.getAttribute("list");
+		for (ProductDTO productDTO : ar){		
+	%>
+			<h3><%= productDTO.getPro_num() %></h3>
+			<h3><a href = "detail.do?productNum=<%= productDTO.getPro_num() %>"><%= productDTO.getPro_name() %></a></h3>
+
+	<%} %>
+	
+	
+	
+	
 	
 	<%-- <%
 	ProductDAO productDAO = new ProductDAO();
