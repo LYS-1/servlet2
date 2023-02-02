@@ -66,17 +66,27 @@ public class HomeController extends HttpServlet {
 //			System.out.println("money : " + strL);
 //		}
 		
+//		PrintWriter out = response.getWriter();
+//		out.println("<h1>lsy page</h1>");
+//		out.println("<h1>gda</h1>");
+//		
+//		out.close();
+		
+		Soldier soldier = new Soldier();
+		Gun gun = new Gun();
+		Bullet bullet = new Bullet();
+		gun.setB(bullet);
+		soldier.setGun(gun);
+		
+		soldier.useGun();
+		
 		
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/home.jsp");
 		view.forward(request, response);
 		
 		
 		
-//		PrintWriter out = response.getWriter();
-//		out.println("<h1>lsy page</h1>");
-//		out.println("<h1>gda</h1>");
-//		
-//		out.close();
+
 	}
 
 	/**

@@ -67,6 +67,8 @@ public class ProductController extends HttpServlet {
 			view = request.getRequestDispatcher("/WEB-INF/views/product/productAdd.jsp");
 			view.forward(request, response);
 			break;
+			
+			
 		case "detail.do":
 			ProductDTO productDTO = new ProductDTO();
 			String productNumber = request.getParameter("productNum");
@@ -84,6 +86,8 @@ public class ProductController extends HttpServlet {
 			view = request.getRequestDispatcher("/WEB-INF/views/product/productDetail.jsp");
 			view.forward(request, response);
 			break;
+			
+			
 		case "update.do":
 			view = request.getRequestDispatcher("/WEB-INF/views/product/productUpdate.jsp");
 			view.forward(request, response);
