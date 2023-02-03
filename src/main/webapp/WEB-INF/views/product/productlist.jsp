@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ page import = "java.util.List" %>
-<%@ page import = "com.company.home.test.product.ProductDAO" %>
-<%@ page import = "com.company.home.test.product.ProductDTO" %>
-<%@ page import = "com.company.home.test.product.option.ProductOptionDAO" %>
+<%@ page import = "com.home.spring.product.ProductDAO" %>
+<%@ page import = "com.home.spring.product.ProductDTO" %>
+<%@ page import = "com.home.spring.product.option.ProductOptionDAO" %>
 <html>
 <head>
 <meta charset="UTF-8">
